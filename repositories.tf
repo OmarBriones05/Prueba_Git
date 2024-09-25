@@ -1,12 +1,7 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
-# Create infrastructure repository
 resource "github_repository" "infrastructure" {
   name = "learn-tf-infrastructure"
 }
 
-# Add memberships for infrastructure repository
 resource "github_team_repository" "infrastructure" {
   for_each = {
     for team in local.repo_teams_files["infrastructure"] :
@@ -21,12 +16,10 @@ resource "github_team_repository" "infrastructure" {
   permission = each.value.permission
 }
 
-# Create application repository
 resource "github_repository" "application" {
   name = "learn-tf-application"
 }
 
-# Add memberships for application repository
 resource "github_team_repository" "application" {
   for_each = {
     for team in local.repo_teams_files["application"] :
